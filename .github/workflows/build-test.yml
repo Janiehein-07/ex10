@@ -1,0 +1,22 @@
+name: build & test python
+on:
+  push:
+    branches: [ main ]
+  pull-request:
+    branches: [ main ]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install dependies
+        run: pip install -r requirements.txt
+
+      - name: run tests
+        run: pytest test_app.py -v
